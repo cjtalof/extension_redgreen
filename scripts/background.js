@@ -41,11 +41,11 @@ function timeStamp() {
 function addToLog(message) {
   chrome.storage.local.get(['log'], function(result) {
     var arr = result['log'];
-    if (arr.length === 10) {
+    if (arr.length === 50) {
       arr.shift();
       arr.push(message);
     }
-    else if (arr.length < 10){
+    else if (arr.length < 50){
       arr.push(message);
     }
     chrome.storage.local.set({'log': arr});
@@ -72,7 +72,7 @@ chrome.storage.local.get(['log'], function(result) {
     if (condition === "offline") {
       trueCondition = "red";
       if (trueCondition !== prev_condition) {
-        var message = "Offline at:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
+        var message = "Offline at: ";
         message += timeStamp();
         console.log(message);
         addToLog(message);
@@ -82,7 +82,7 @@ chrome.storage.local.get(['log'], function(result) {
       if (flag === true) {
         trueCondition = "green";
         if (trueCondition !== prev_condition) {
-          var message = "Online at: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+          var message = "Online at: ";
           message += timeStamp();
           console.log(message);
           addToLog(message);
@@ -91,7 +91,7 @@ chrome.storage.local.get(['log'], function(result) {
       } else {
         trueCondition = "yellow";
         if (trueCondition !== prev_condition) {
-          var message = "Local connection at:&nbsp;&nbsp;&nbsp;";
+          var message = "Local connection at: ";
           message += timeStamp();
           console.log(message);
           addToLog(message);
